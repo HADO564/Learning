@@ -1,4 +1,5 @@
 #include<iostream>
+#include<string.h>
 using namespace std;
 
 struct staticArrayList{
@@ -41,22 +42,41 @@ struct staticArrayList{
         }
         void insertAtposition(int value, int position){
                 MakeRoom(position);
-                array[position-1]=value;
+                array[position]=value;
                 length++;
             
         }
-        void insertSorted(int value){
-            for(int i = 0; i<length;i++)
+        int Compare(int value)
+        {
+            int position;
+            int i=0;
+            while(i<=length)
             {
-                cout << "Haider" << endl;
-             if(array[i]>value)
-             {
-                 MakeRoom(i);
-                 array[i]=value;
-                 length++;
-                 break;
-             }
+                if(value>array[i])
+                {
+                    i++;
+                }
+                else
+                {
+                    return i;
+                    break;
+                }
             }
+        }
+        void insertSorted(int value){
+            int position;
+            if(!isEmpty()){
+                position=Compare(value);
+                MakeRoom(position);
+                array[position]=value;
+                length++;
+        
+            }
+            else
+            {
+                array[0]=value;
+                length++;
+            }   
         }
         void printList(){
             if(!isEmpty()){
@@ -87,12 +107,48 @@ struct staticArrayList{
 int main()
 {
 struct staticArrayList l1;
-l1.insertSorted(0);
-
-l1.insertSorted(3);
-l1.insertSorted(2);
-l1.printList();
-
+char dec ='1';
+int val;
+int pos;
+do{
+cout<<"Press \"A\" to add to list by position"<<endl<<"Press \"B\" to add to list automatically sorted"<<endl<<"Press \"C\" to delete an item from the list"<<endl<<"Press \"D\" to delete item from a position in the array"<<endl<<"Press \"E\" to print list"<<endl<<"Press \"Q\" to quit"<<endl;
+cin>>dec;
+toupper(dec);
+switch(dec)
+{
+    case 'A':
+        cout<<"Enter the value and its position respectively"<<endl;
+        cin>>val>>pos;
+        l1.insertAtposition(val,pos);
+        break;
+    case 'B':
+        cout<<"Enter the value"<<endl;
+        cin>>val;
+        l1.insertSorted(val);
+        break;
+    case 'C':
+        cout<<"Enter the value"<<endl;
+        cin>>val;
+        l1.DeleteValue(val);
+        break;
+    case 'D':
+        cout<<"Enter the position"<<endl;
+        cin>>pos;
+        l1.DeleteValueAtPosition(pos);
+        break;
+    case 'E':
+        cout<<"The values will be printed"<<endl;
+        l1.printList();
+        cout<<endl;
+        break;
+    case 'Q':
+        cout<<"Program will exit now"<<endl;
+        break;
+    default:
+        cout<<"Invalid input. Please enter again"<<"\n"<<endl;
+}
+}while(dec != 'Q');
+return 0;
 
 }
 
