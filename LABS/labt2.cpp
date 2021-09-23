@@ -117,7 +117,7 @@ struct staticArrayList{
         void DeleteValue(int value)
         {
             bool dec;
-            for(int i =1;i<length;i++)
+            for(int i =1;i<=length;i++)
             {
                 if(current[i]==value)
                 {
@@ -127,7 +127,7 @@ struct staticArrayList{
                         shrinking();
                     }
                 }
-                else
+                else if(i==length)
                 cout<<"Value Not found"<<endl;
             }
         }
