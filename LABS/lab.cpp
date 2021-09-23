@@ -113,7 +113,7 @@ int pos;
 do{
 cout<<"Press \"A\" to add to list by position"<<endl<<"Press \"B\" to add to list automatically sorted"<<endl<<"Press \"C\" to delete an item from the list"<<endl<<"Press \"D\" to delete item from a position in the array"<<endl<<"Press \"E\" to print list"<<endl<<"Press \"Q\" to quit"<<endl;
 cin>>dec;
-toupper(dec);
+dec=toupper(dec);
 switch(dec)
 {
     case 'A':
