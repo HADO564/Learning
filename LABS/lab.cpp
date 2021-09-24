@@ -88,14 +88,22 @@ struct staticArrayList{
         }
         void DeleteValue(int value)
         {
-            for(int i =1;i<length;i++)
+            for(int i =1;i<=length;i++)
             {
                 if(array[i]==value)
                 {
                     FillGap(i);
+                    break;
                 }
-                else
+                else if(array[0]==value)
+                {
+                    FillGap(0);
+                    break;
+                }
+                else if(i==length)
+                {
                 cout<<"Value Not found"<<endl;
+                }
             }
         }
         void DeleteValueAtPosition(int pos)
