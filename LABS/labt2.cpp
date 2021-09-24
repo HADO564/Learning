@@ -127,6 +127,10 @@ struct DynamicArrayList{
                         shrinking();
                     }
                 }
+                else if(current[0]==value)
+                {
+                    dec= FillGap(0);
+                }
                 else if(i==length)
                 cout<<"Value Not found"<<endl;
             }
