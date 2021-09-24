@@ -2,7 +2,7 @@
 #include<string.h>
 using namespace std;
 
-struct staticArrayList{
+struct dynamicArrayList{
         int* current= new int[size];
         int* narray;
         int size=4;
@@ -147,7 +147,7 @@ struct staticArrayList{
 
 int main()
 {
-struct staticArrayList l1;
+struct dynamicArrayList l1;
 char dec ='1';
 int val;
 int pos;
