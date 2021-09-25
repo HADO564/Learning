@@ -134,6 +134,18 @@ class list
     
         }
     }
+    void destroyList()
+    {
+        node* temp;
+        while(start!=NULL)
+        {
+            temp=start;
+            start=start->next;
+            delete temp;
+        }
+        last=NULL;
+
+    }
 }
 
 
