@@ -1,5 +1,7 @@
 #include<iostream>
+#include<string.h>
 using namespace std;
+
 
 class node
 {
@@ -23,17 +25,18 @@ class list
     }
     bool isEmpty()
     {
-        return *start==NULL
+        return start==NULL;
     }
     void PrintList()
-    {
+    { int i=1;
         if(!isEmpty())
         {
             node *temp = start;
             while(temp!=NULL)
             {
-                cout<<temp->data<<endl;
+                cout<<"Position "<<i<<" Data"<<temp->data<<endl;
                 temp = temp->next;
+                i++;
             }
         }
         else
@@ -42,29 +45,35 @@ class list
     void Search(int value)
     {
         loc=start;
-        ploc=null;
-        if(!isEmpty())
+        ploc=NULL;
+        cout<<"Boo"<<endl;
         while(loc!=NULL && value>loc->data)
         {
             ploc=loc;
             loc=loc->next;
+            cout<<"Fuck"<<endl;
         }
-        else
+        /*if(isEmpty())
         {
         cout<<"List is empty"<<endl;
         return;
-        }
+        }*/
         if(loc!=NULL && loc->data!=value)
-        loc=null;
+        {
+        loc=NULL;
+        cout<<"Hello"<<endl;
+        }
     }
     void InsertAtFront(int value)
     {
+        cout<<"Insertion at front"<<endl;
         node *newNode = new node;
         newNode->data=value;
         if(isEmpty())
         {
             start=newNode;
             last=newNode;
+            newNode->next=NULL;
         }
         else{
             newNode->next=start;
@@ -88,6 +97,7 @@ class list
                 if(ploc==last)
                     last=newNode;
                 length++;
+                cout<<"Insertion at some place else"<<endl;
             }
         }
         else{
@@ -99,28 +109,33 @@ class list
         if(!isEmpty())
         {
             Search(value);
-            if(loc!=Null)
+            if(loc!=NULL)
             {
+                cout<<"HALLO"<<endl;
                 if(start==last)
                 {
-                    start=null;
-                    last=null;
+                    cout<<"0"<<endl;
+                    start=NULL;
+                    last=NULL;
                 }
-                else if(ploc==Null)
+                else if(ploc==NULL)
                 {
-                    delete start;
+                    cout<<"1"<<endl;
                     start=loc->next;
+                    delete loc;
                     loc=start;
                     
                 }
                 else if(loc->next==NULL)
                 {
+                    cout<<"3"<<endl;
                     delete last;
                     last=ploc;
                     ploc->next=NULL;
                 }
                 else
                 {
+                    cout<<"4"<<endl;
                     ploc->next=loc->next;
                     delete loc;
                     
@@ -146,6 +161,51 @@ class list
         last=NULL;
 
     }
+};
+int main()
+{
+    char dec='o';//Decision variable
+    int ins;
+    
+    list l;
+    while(dec!='Q'&&dec!='q')
+    {
+    node *newNode=new node;
+    cout<<"Press A to insert a value in a sorted manner"<<endl;
+    cout<<"Press B to delete a value which will be searched"<<endl;
+    cout<<"Press C to print the list"<<endl;
+    cout<<"Press D to destroy the list"<<endl;
+    cout<<"Press Q to quit "<<endl;
+    cin>>dec;
+    switch(toupper(dec))
+    {
+        case 'A':
+        cout<<"Insert the value"<<endl;
+        cin>>ins;
+        l.InsertValue(ins);
+        break;
+        case 'B':
+        cout<<"Insert value for deletion"<<endl;
+        cin>>ins;
+        l.DeleteValue(ins);
+        break;
+        case 'C':
+        cout<<"The list is"<<endl;
+        l.PrintList();
+        break;
+        case 'D':
+        cout<<"The list is destroyed"<<endl;
+        l.destroyList();
+        break;
+        case 'Q':
+        cout<<"Quitting"<<endl;
+        break;
+        default:
+        cout<<"Please enter a valid input"<<endl;
+
+    }
+    }
 }
+
 
 
