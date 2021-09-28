@@ -3,36 +3,37 @@
 using namespace std;
 
 
-class node
+class node//class description for a single node in the linked list
 {
     public:
     int data;
     node *next;
 };
 
-class list
+class list //list class that will contain the nodes
 {
     public:
-    node *start;
-    node *last;
-    int length=0;
-    node *ploc;
-    node *loc;
-    list(){
+    node *start;//pointer pointing at start of list
+    node *last;//pointer pointing at end of list
+    int length=0;//length of the list
+    node *ploc;//pointer pointing to previous location (address) of node.
+    node *loc;//pointer pointing at current location (address) of node.
+    list(){//constructor for initializing linked lists
         start=NULL;
         last=NULL;
         length=0;
     }
-    bool isEmpty()
+    bool isEmpty()//function for checking if list is empty
     {
         return start==NULL;
     }
-    void PrintList()
+    void PrintList()//function for printing linked list
     { int i=1;
-        if(!isEmpty())
+        if(!isEmpty())//checks if list is empty, in which case it won't print anything
         {
-            node *temp = start;
-            while(temp!=NULL)
+            node *temp = start;//points at start
+            while(temp!=NULL)//loop iterates until the value is null
+            //which will only happen if list is empty or end of list is achieved
             {
                 cout<<"Position "<<i<<" Data"<<temp->data<<endl;
                 temp = temp->next;
@@ -42,29 +43,27 @@ class list
         else
         cout<<"List is empty"<<endl;
     }
-    void Search(int value)
+    void Search(int value)//Searching function for searching values to deletion or insertion
     {
         loc=start;
         ploc=NULL;
-        cout<<"Boo"<<endl;
         while(loc!=NULL && value>loc->data)
         {
             ploc=loc;
             loc=loc->next;
-            cout<<"Fuck"<<endl;
         }
-        /*if(isEmpty())
-        {
-        cout<<"List is empty"<<endl;
-        return;
-        }*/
+        //*if(isEmpty())
+        //{
+        //cout<<"List is empty"<<endl;
+        //return;
+        //}*/
+        //The above commented code is irrelevant to our needs
         if(loc!=NULL && loc->data!=value)
         {
         loc=NULL;
-        cout<<"Hello"<<endl;
         }
     }
-    void InsertAtFront(int value)
+    void InsertAtFront(int value)//Insertion at front end function.
     {
         cout<<"Insertion at front"<<endl;
         node *newNode = new node;
@@ -81,12 +80,13 @@ class list
         }
         length++;
     }
-    void InsertValue(int value)
+    void InsertValue(int value)//Function for the insertion of any value
+    // which will be automatically sorted into the list
     {
-        Search(value);
+        Search(value);//calls search function
         if(loc==NULL)
         {
-            if(ploc==NULL)
+            if(ploc==NULL)//ploc is null at front end
             InsertAtFront(value);
             else
             {
@@ -104,38 +104,39 @@ class list
             cout<<"Duplication not allowed"<<endl;
         }
     }
-    void DeleteValue(int value)
+    void DeleteValue(int value)//Function for the deletion of the values. 
+    // Value that is to be deleted will be searched using the search function
     {
-        if(!isEmpty())
+        if(!isEmpty())//Checking if list is not empty
         {
-            Search(value);
+            Search(value);//search function called to search for value
             if(loc!=NULL)
             {
-                cout<<"HALLO"<<endl;
-                if(start==last)
+               
+                if(start==last)//if there is only one node, this statement will be true
                 {
-                    cout<<"0"<<endl;
+                    
                     start=NULL;
                     last=NULL;
                 }
-                else if(ploc==NULL)
+                else if(ploc==NULL)//if the node that is being searched is at the front end, this will be true
                 {
-                    cout<<"1"<<endl;
+                  
                     start=loc->next;
                     delete loc;
                     loc=start;
                     
                 }
-                else if(loc->next==NULL)
+                else if(loc->next==NULL)//If the node is at the tail end then this function will be called.
                 {
-                    cout<<"3"<<endl;
+                    
                     delete last;
                     last=ploc;
                     ploc->next=NULL;
                 }
-                else
+                else//lastly, if the function is in the middle, this part will run
                 {
-                    cout<<"4"<<endl;
+                   
                     ploc->next=loc->next;
                     delete loc;
                     
@@ -143,13 +144,15 @@ class list
                 length--;
 
             }
-            else{
+            else{//part will run if value is not found
                 cout<<"Value Not Found"<<endl;
             }
     
         }
+        else
+        cout<<"List is empty"<<endl;
     }
-    void destroyList()
+    void destroyList()//function for destruction of the list
     {
         node* temp;
         while(start!=NULL)
@@ -165,10 +168,10 @@ class list
 int main()
 {
     char dec='o';//Decision variable
-    int ins;
+    int ins;//variable for insertion and deletion
     
     list l;
-    while(dec!='Q'&&dec!='q')
+    while(dec!='Q'&&dec!='q')//loop in case someone wants to quit the program
     {
     node *newNode=new node;
     cout<<"Press A to insert a value in a sorted manner"<<endl;
@@ -177,8 +180,8 @@ int main()
     cout<<"Press D to destroy the list"<<endl;
     cout<<"Press Q to quit "<<endl;
     cin>>dec;
-    switch(toupper(dec))
-    {
+    switch(toupper(dec))//checks users input
+    {//rest is self explanatory
         case 'A':
         cout<<"Insert the value"<<endl;
         cin>>ins;
