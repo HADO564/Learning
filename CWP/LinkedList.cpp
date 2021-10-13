@@ -173,6 +173,7 @@ int main()
     list l;
     while(dec!='Q'&&dec!='q')//loop in case someone wants to quit the program
     {
+        
     node *newNode=new node;
     cout<<"Press A to insert a value in a sorted manner"<<endl;
     cout<<"Press B to delete a value which will be searched"<<endl;

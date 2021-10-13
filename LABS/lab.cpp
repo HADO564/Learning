@@ -6,13 +6,13 @@ struct staticArrayList{
         int static const size= 5;
         int length = 0;
         int array[size];
-        bool isEmpty(){
+        bool isEmpty(){//function for checking if array list is empty
             return length == 0;
         }
-        bool isFull(){
+        bool isFull(){//function for checking if array list is full
             return length==size;
         }
-        void FillGap(int position)
+        void FillGap(int position)//Fills gap after deletion
         {
             if(!isEmpty())
             {
@@ -23,12 +23,15 @@ struct staticArrayList{
                     }
                     length--;
                 }
+                else{//if the value is at the tail end, it will simply mark it as overwritable(deleted in a sense)
+                    length--;
+                }
             }
             else
             cout<<"List is empty"<<endl;
         }
-        void MakeRoom(int position){
-            if(!isFull())
+        void MakeRoom(int position){//Creates Room for insertion of new values
+            if(!isFull())//If array list isn't full, make space for insertion of element
             {
                 for(int i = length;i>=position;i--)
                 {
@@ -40,20 +43,21 @@ struct staticArrayList{
                     cout<<"List is full"<<endl;
                 }
         }
-        void insertAtposition(int value, int position){
+        void insertAtposition(int value, int position){//name of the function explains it
                 MakeRoom(position);
                 array[position]=value;
                 length++;
             
         }
-        int Compare(int value)
+        int Compare(int value)//Checks value for the insertion in a sorted manner.
         {
             int position;
             int i=0;
             while(i<=length)
             {
-                if(value>array[i])
-                {
+                if(value>array[i])//checks if the inputted value is greater than the one in array
+                {//if the value is greater, then it checks the next position. If that one is not, then space is made for
+                //the insertion of the value. 
                     i++;
                 }
                 else
@@ -63,7 +67,7 @@ struct staticArrayList{
                 }
             }
         }
-        void insertSorted(int value){
+        void insertSorted(int value){//Inserts a value based on its magnitude in the list
             int position;
             if(!isEmpty()){
                 position=Compare(value);
@@ -78,7 +82,7 @@ struct staticArrayList{
                 length++;
             }   
         }
-        void printList(){
+        void printList(){//Displays elements of list
             if(!isEmpty()){
                 for(int i =0;i<length;i++){
                     cout<<"Pos:"<<(i+1)<<" val:"<<array[i]<<endl;
@@ -86,7 +90,7 @@ struct staticArrayList{
                 }
             }
         }
-        void DeleteValue(int value)
+        void DeleteValue(int value)//Searches for the value in the list and then deletes it
         {
             for(int i =1;i<=length;i++)
             {
@@ -106,14 +110,14 @@ struct staticArrayList{
                 }
             }
         }
-        void DeleteValueAtPosition(int pos)
+        void DeleteValueAtPosition(int pos)//deletes a value at a specified position
         {
             FillGap(pos);
         }
 };
 
 int main()
-{
+{//General purpose main funciton to allow user to make decisions
 struct staticArrayList l1;
 char dec ='1';
 int val;

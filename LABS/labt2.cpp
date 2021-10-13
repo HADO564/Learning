@@ -2,23 +2,23 @@
 #include<string.h>
 using namespace std;
 
-struct DynamicArrayList{
-        int* current= new int[size];
-        int* narray;
-        int size=4;
+struct DynamicArrayList{//Structure/Class for Dynamic Array list
+        int* current= new int[size];//pointer for the current array
+        int* narray;//pointer to the newer array. Used in expansion and shrinking
+        int size=4;//value has been assigned to avoid garbage values
         int length = 0;
       
-        bool isEmpty(){
+        bool isEmpty(){//Same function from static list
             return length == 0;
         }
-        bool isArrayFull(){
+        bool isArrayFull(){//modified function. Always returns false as length will never equal size at the end of the function
             if(length==size)
             {
                 expansion();
             }
             return length==size;
         }
-        void expansion()
+        void expansion()//Function to dynamically expand the list
         {   
             size=size*2;
             narray = new int[size];
@@ -30,7 +30,7 @@ struct DynamicArrayList{
             current= narray;
 
         }
-        void shrinking()
+        void shrinking()//Function to dynamically shrink list
         {
             size=size/2;
             narray= new int[size];
@@ -41,7 +41,7 @@ struct DynamicArrayList{
             delete[] current;
             current=narray;
         }
-        bool FillGap(int position)
+        bool FillGap(int position)//Same filling function
         {
             if(!isEmpty())
             {
@@ -53,13 +53,18 @@ struct DynamicArrayList{
                     length--;
                     return true;
                 }
+                else
+                {
+                length--;
+                return true;
+                }
             }
             else{
                 cout<<"List is empty"<<endl;
                 return false;   
                 }
         }
-        void MakeRoom(int position){
+        void MakeRoom(int position){//Same function to make space for insertion
             if(!isArrayFull())
             {
                 for(int i = length;i>=position;i--)
@@ -68,13 +73,13 @@ struct DynamicArrayList{
                 }
             }
         }
-        void insertAtposition(int value, int position){
+        void insertAtposition(int value, int position){//Same function to allow insertion at any position
                 MakeRoom(position);
                 current[position]=value;
                 length++;
             
         }
-        int Compare(int value)
+        int Compare(int value)//Same function for insertion of value in a sorted manner
         {
             int position;
             int i=0;
@@ -91,7 +96,7 @@ struct DynamicArrayList{
                 }
             }
         }
-        void insertSorted(int value){
+        void insertSorted(int value){//Same function from static list
             int position;
             if(!isEmpty()){
                 position=Compare(value);
@@ -114,7 +119,7 @@ struct DynamicArrayList{
                 }
             }
         }
-        void DeleteValue(int value)
+        void DeleteValue(int value)//deletion of value
         {
             bool dec;
             for(int i =1;i<=length;i++)
@@ -122,20 +127,24 @@ struct DynamicArrayList{
                 if(current[i]==value)
                 {
                     dec= FillGap(i);
-                    if((length<=size/2)&& dec)
+                    if((length<=size/2)&& dec)//shrinks if the conditions are satisfied
                     {
                         shrinking();
                     }
                 }
-                else if(current[0]==value)
+                else if(current[0]==value)//deletion at front end
                 {
                     dec= FillGap(0);
+                    if((length<=size/2)&& dec)//shrinks if the conditions are satisfied
+                    {
+                        shrinking();
+                    }
                 }
-                else if(i==length)
+                else if(i==length)//in case value is not found
                 cout<<"Value Not found"<<endl;
             }
         }
-        void DeleteValueAtPosition(int pos)
+        void DeleteValueAtPosition(int pos)//deletion at any position
         {
             if(!isEmpty())
             {
@@ -149,7 +158,7 @@ struct DynamicArrayList{
         }
 };
 
-int main()
+int main()//general purpose main function allowing user to make decisions
 {
 struct DynamicArrayList l1;
 char dec ='1';
